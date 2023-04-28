@@ -1,0 +1,47 @@
+<div class="card">
+    <div class="card-header">
+       ORDEN
+    </div>
+    <div class="card-body">
+          <div class="row">
+             <div class="col-md-3">
+               <form [formGroup]="ordenForm">
+                  <label for = "ID_CLIENTE">CLIENTE:</label>
+                  <select name="ID_CLIENTE" class="form-control" formControlName="ID_CLIENTE">
+                     <option *ngFor = "let item of tecnSvc.cliente" [value] = "item.ID">{{item.NOMBRE}}</option>
+                   </select>
+
+                  <label for = "ID_ITEM">ITEM:</label>
+                  <select name="ID_ITEM" class="form-control" formControlName="ID_ITEM">
+                     <option *ngFor = "let item of tecnSvc.item" [value] = "item.ID">{{item.DESCRIP}}</option>
+                   </select>
+                   <button class="btn btn-success" style="float: right;" (click) = "addOrden()">Crear</button>
+                  </form>
+             </div>
+             <div class="col-md-9">
+                <div class="table-responsive" >
+                   <table class="table table-bordered">
+                      <thead>
+                         <tr>
+                            <th>ID</th>
+                            <th>ID_CLIENTE</th>
+                            <th>ID_ITEM</th>
+                            <th>FECHA</th>
+                            <th>ESTADO</th>
+                         </tr>
+                      </thead>
+                      <tbody>
+                         <tr *ngFor = "let item of tecnSvc.orden">
+                            <td>{{item.ID}}</td>
+                            <td>{{item.ID_CLIENTE}}</td>
+                            <td>{{item.ID_ITEM}}</td>
+                            <td>{{item.FECHA}}</td>
+                            <td>{{item.ESTADO}}</td>
+                         </tr>
+                      </tbody>
+                   </table>
+                </div>
+             </div>
+          </div>
+    </div>
+ </div>

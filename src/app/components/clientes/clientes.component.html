@@ -1,0 +1,68 @@
+<div class="card">
+    <div class="card-header">
+       CLIENTES
+    </div>
+    <div class="card-body">
+          <div class="row">
+             <div class="col-md-3">
+               <form [formGroup]="clientForm">
+               <label for = "ID">ID:</label>
+               <input type="number" class="form-control" formControlName ="ID" value="0" readonly>
+
+               <label for = "NOMBRE">NOMBRE:</label>
+               <input type="text" class="form-control" placeholder="Digite el NOMBRE" formControlName ="NOMBRE">
+
+               <label for = "APELLIDO">APELLIDO:</label>
+               <input type="text" class="form-control" placeholder="Digite el APELLIDO" formControlName ="APELLIDO">
+
+               <label for = "DIRECCION">DIRECCION:</label>
+               <input type="text" class="form-control" placeholder="Digite la DIRECCION" formControlName ="DIRECCION">
+
+               <label for = "TELEFONO">TELEFONO:</label>
+               <input type="number" class="form-control" placeholder="Digite el TELEFONO" formControlName ="TELEFONO">
+
+               <label for = "NACIONALIDAD">NACIONALIDAD:</label>
+               <input type="text" class="form-control" placeholder="Digite la NACIONALIDAD" formControlName ="NACIONALIDAD">
+
+               <label for = "CORREO">CORREO:</label>
+               <input type="email" class="form-control" placeholder="Digite el CORREO" formControlName ="CORREO">
+
+               <button class="btn btn-success" style="float: right;" (click) = "actionClick()">Añadir</button>
+               </form>
+             </div>
+             <div class="col-md-9">
+                <div class="table-responsive" >
+                   <table class="table table-bordered">
+                      <thead>
+                         <tr>
+                            <th>ID</th>
+                            <th>NOMBRE</th>
+                            <th>APELLIDO</th>
+                            <th>DIRECCION</th>
+                            <th>TELEFONO</th>
+                            <th>NACIONALIDAD</th>
+                            <th>CORREO</th>
+                            <th>FECHA_CREADO</th>
+                            <th>ACCIONES</th>
+                         </tr>
+                      </thead>
+                      <tbody>
+                         <tr *ngFor = "let item of tecnSvc.cliente">
+                            <td (click) = "fillform(item.ID, item.NOMBRE, item.APELLIDO, 
+                            item.DIRECCION, item.TELEFONO, item.NACIONALIDAD, item.CORREO)" >{{item.ID}}</td>
+                            <td>{{item.NOMBRE}}</td>
+                            <td>{{item.APELLIDO}}</td>
+                            <td>{{item.DIRECCION}}</td>
+                            <td>{{item.TELEFONO}}</td>
+                            <td>{{item.NACIONALIDAD}}</td>
+                            <td>{{item.CORREO}}</td>
+                            <td>{{item.F_CREA}}</td>
+                            <td><button type="button" class="btn btn-danger" (click) = "deleteClient(item.ID)">Eliminar</button></td>
+                         </tr>
+                      </tbody>
+                   </table>
+                </div>
+             </div>
+          </div>
+    </div>
+ </div>
