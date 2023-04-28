@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { TecnoglassService } from 'src/app/services/tecnoglass.service';
 import {FormBuilder,FormControl,FormGroup,Validators,FormArray} from '@angular/forms';
+import { ToastrService } from 'ngx-toastr';
 
 @Component({
   selector: 'app-item',
@@ -8,7 +9,7 @@ import {FormBuilder,FormControl,FormGroup,Validators,FormArray} from '@angular/f
   styleUrls: ['./item.component.css']
 })
 export class ItemComponent {
-  constructor(public tecnSvc : TecnoglassService, public fb: FormBuilder){}
+  constructor(public toastr: ToastrService, public tecnSvc : TecnoglassService, public fb: FormBuilder){}
 
   ngOnInit(): void {
     this.getItem();
@@ -36,11 +37,13 @@ export class ItemComponent {
   {
     this.tecnSvc.addItem(this.itemForm.value).subscribe(res => {
       console.log(res);
+      this.toastr.success('Se ha guardado exitosamente', 'Success!');
       this.ngOnInit();
     },
     err => 
     {
       console.log(err);
+      this.toastr.error('Hubo un problema al guardar', 'Error!');
     });
   }
 

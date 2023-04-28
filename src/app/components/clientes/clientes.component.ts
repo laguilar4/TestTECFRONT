@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { TecnoglassService } from 'src/app/services/tecnoglass.service';
 import {FormBuilder,FormControl,FormGroup,Validators,FormArray} from '@angular/forms';
+import { ToastrService } from 'ngx-toastr';
 
 @Component({
   selector: 'app-clientes',
@@ -9,7 +10,7 @@ import {FormBuilder,FormControl,FormGroup,Validators,FormArray} from '@angular/f
 })
 export class ClientesComponent implements OnInit{
 
-  constructor(public tecnSvc : TecnoglassService,  public fb: FormBuilder){}
+  constructor(public toastr: ToastrService, public tecnSvc : TecnoglassService,  public fb: FormBuilder){}
 
   updateForm = false;
 
@@ -53,6 +54,7 @@ export class ClientesComponent implements OnInit{
   {
     this.tecnSvc.addCliente(this.clientForm.value).subscribe(res => {
       console.log(res);
+      this.toastr.success('Se ha guardado exitosamente', 'Success!');
       this.ngOnInit();
     },
     err => 
@@ -65,11 +67,13 @@ export class ClientesComponent implements OnInit{
   {
     this.tecnSvc.updateCliente(this.clientForm.value, this.clientForm.value.ID!).subscribe(res => {
       console.log(res);
+      this.toastr.success('Se ha actualizado exitosamente', 'Success!');
       this.ngOnInit();
     },
     err => 
     {
       console.log(err);
+      this.toastr.error('Hubo un problema al guardar', 'Error!');
     });
   }
 

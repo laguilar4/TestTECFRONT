@@ -1,5 +1,6 @@
 import { Component } from '@angular/core';
 import { TecnoglassService } from 'src/app/services/tecnoglass.service';
+import { ToastrService } from 'ngx-toastr';
 
 @Component({
   selector: 'app-solicitud',
@@ -8,7 +9,7 @@ import { TecnoglassService } from 'src/app/services/tecnoglass.service';
 })
 export class SolicitudComponent {
 
-  constructor(public tecnSvc : TecnoglassService){}
+  constructor(public toastr: ToastrService, public tecnSvc : TecnoglassService){}
 
   ngOnInit(): void {
     this.getSolicitudes();
@@ -29,11 +30,13 @@ export class SolicitudComponent {
   {
     this.tecnSvc.updateOrden(ESTADO, id).subscribe(res => {
       console.log(res);
+      this.toastr.success('La accion se ha realizado exitosamente', 'Success!');
       this.ngOnInit();
     },
     err => 
     {
       console.log(err);
+      this.toastr.error('Hubo un problema al realizar la accion', 'Error!');
     });
   }
 

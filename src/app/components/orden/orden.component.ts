@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { TecnoglassService } from 'src/app/services/tecnoglass.service';
 import {FormBuilder,FormControl,FormGroup,Validators,FormArray} from '@angular/forms';
+import { ToastrService } from 'ngx-toastr';
 
 @Component({
   selector: 'app-orden',
@@ -9,7 +10,7 @@ import {FormBuilder,FormControl,FormGroup,Validators,FormArray} from '@angular/f
 })
 export class OrdenComponent {
 
-  constructor(public tecnSvc : TecnoglassService, public fb: FormBuilder){}
+  constructor(public toastr: ToastrService, public tecnSvc : TecnoglassService, public fb: FormBuilder){}
   
   public ordenForm = this.fb.group({
     ID_CLIENTE:[0],
@@ -60,11 +61,13 @@ export class OrdenComponent {
   {
     this.tecnSvc.addOrden(this.ordenForm.value).subscribe(res => {
       console.log(res);
+      this.toastr.success('Se ha guardado exitosamente', 'Success!');
       this.ngOnInit();
     },
     err => 
     {
       console.log(err);
+      this.toastr.error('Hubo un problema al guardar', 'Error!');
     });
   }
 
